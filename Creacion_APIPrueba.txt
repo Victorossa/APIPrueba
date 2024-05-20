@@ -1,0 +1,514 @@
+=========== 1 ===========
+_____________________________________________________________________
+
+      ACCEDER A AZURE Y CREAR REPOSITORIO
+_____________________________________________________________________
+
+https://dev.azure.com/victorossafreelancer
+Password: 8370*ines
+
+CREAR NUEVO PROYECTO EN AZURE
+-Nombre del proyecto: APIPrueba
+-Descripcion: 
+PRUEBA API 8 del cliente NAME_CLIENT es una API de vanguardia que ofrece una solucion ágil y escalable que impulsa el proyecto hacia el éxito. Con funcionalidades personalizadas y un rendimiento excepcional, brinda la flexibilidad y la confiabilidad que se necesita para alcanzar los objetivos de negocio. para llevar el proyecto al siguiente nivel
+
+Tecnologia
+Rendimiento y Escalabilidad: 
+ASP.NET Core 8 ofrece mejoras en rendimiento y capacidad de escalado, ideal para aplicaciones de alta demanda.
+
+Modularidad: 
+Su arquitectura modular permite añadir solo los componentes necesarios, reduciendo la sobrecarga.
+
+Seguridad: 
+Incluye características avanzadas de seguridad, como autenticación y autorización integradas.
+
+Compatibilidad y Flexibilidad: 
+Soporta múltiples plataformas y contenedores, facilitando el desarrollo y despliegue en diversos entornos.
+
+Productividad: 
+Herramientas como Visual Studio y VS Code, junto con mejoras en el framework, aumentan la eficiencia del desarrollo.
+
+El Proyecto realizado en Asp .Net Core 8 con 3 Capas
+1 - API
+2 - Core
+3 - Infraestructura
+
+-Visibilidad: Publica
+-Version Control: Git
+-Work item process: SCRUM
+-Crear
+
+_____________________________________________________________________
+
+      REPOSITORIO DE GIT
+_____________________________________________________________________
+
+
+REPOSITORIO GIT
+https://github.com/Victorossa?tab=repositories
+Acceso...
+8370ines
+https://github.com/Victorossa/infoPLE.git
+
+=========== 2 ===========
+_____________________________________________________________________________________________
+
+         AGREAGAR INFORMACION PARA LA CREACION DEL APLICATIVO
+                                        EN CARGAR REQUERIMIENTOS
+_____________________________________________________________________________________________
+
+LISTA DE REQUERIMIENTOS PARA LA CREACION DEL PROYECTO
+"!!! NO DEBE DE FALTAR NINGUNO ¡¡¡"
+1 - Nombre de la base de datos SQL Server De Microsoft
+2 - Nombre De La Aplicacion Para El Trabajo, Diferente Al Titulo De Esta
+3 - Titulo De La Aplicacion De .Net Core O Nombre Comercial De Esta
+
+
+
+=========== 3 ===========
+_____________________________________________________________________________________________
+
+         CREACION DE LA APLICACION POR CONSOLA
+_____________________________________________________________________________________________
+
+ dotnet new sln -n "APIPrueba"
+dotnet new webapi -n "APIPrueba.Api" --framework net8.0
+dotnet new classlib -n "APIPrueba.Core" -f net8.0
+dotnet new classlib -n "APIPrueba.Infrastructure" -f net8.0
+dotnet new xunit -n "APIPrueba.Api.Test" -f net8.0
+dotnet new xunit -n "APIPrueba.Core.Test" -f net8.0
+dotnet new xunit -n "APIPrueba.Infrastructure.Test" -f net8.0
+touch Dockerfile
+dotnet sln APIPrueba.sln add APIPrueba.Api
+dotnet sln APIPrueba.sln add APIPrueba.Core
+dotnet sln APIPrueba.sln add APIPrueba.Infrastructure
+dotnet sln APIPrueba.sln add APIPrueba.Api.Test
+dotnet sln APIPrueba.sln add APIPrueba.Core.Test
+dotnet sln APIPrueba.sln add APIPrueba.Infrastructure.Test
+dotnet sln APIPrueba.sln add Dockerfile
+git init
+git status
+git add .
+
+
+Abrir la solucion
+Posicionarnos en la solucion
+Agregar nuevo proyecto - (Todos los lenguajes - Windows - SQL)
+APIPruebaAuditoriaBD
+Click derecho en APIPruebaAuditoriaBD - Importar - Base de datos
+Boton seleccionar conexion
+Pestaña Examinar (Local-Red-Azure)
+Por ser desarrollo selecciona local
+- Nombre del servidor (El que se carga)
+- Autenticacion: Autenticacion de Windows
+- Nombre del usuario: El que carga
+- Nombre de la base de datos: Buscar BDPrueba en la lista
+- Cifrar: Optional (False)
+- Confiar en el certificado del servidor: True
+- Conectar
+
+Configuracion de importacion
+- Solo seleccionar: Importar solo los objetos con ambito en la aplicacion
+- Iniciar
+
+
+
+git commit -m"Inicio de repositorio del proyecto APIPrueba"
+git remote add origin https://victorossafreelancer@dev.azure.com/victorossafreelancer/APIPrueba/_git/APIPrueba
+git push -u origin --all
+git log
+code .
+.
+
+Creacion de proyecto de base de datos
+1- Crear nuevo proyecto
+2- (Todos los lenguajes - Windows - SQL)
+3- APIPruebaAuditoriaBD
+
+
+
+===============================================
+Con autenticacion incluida
+dotnet new webapi -n WebApiModelo.Api --auth IndividualB2C -uld -f net8.0
+
+
+=========== 4 ===========
+_____________________________________________________________________________________________
+
+         EJECUTAR PLE 
+_____________________________________________________________________________________________
+
+Al ejecutar PLE crea todo lo necesario para cada una de las capas del aplicativo
+
+
+********************************************************
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Security]') AND type in (N'U'))
+DROP TABLE [dbo].[Security]
+GO
+
+USE [BDPrueba]
+
+CREATE TABLE [Security](
+    [SecurityId] int primary key identity(1,1), 
+    [User] VARCHAR(50), 
+    [UserName] VARCHAR(100), 
+    [Password] VARCHAR(100), 
+    [Email] VARCHAR(200), 
+    [Role] VARCHAR(50),
+    [DateOfBirth] DATETIME, 
+    [TelephoneNumber] VARCHAR(200), 
+    [Address] VARCHAR(200), 
+    [SessionTokens] INTEGER, 
+    [CommunicationPreferences] INTEGER,
+    [UrlImage] VARCHAR(300),
+    [Active] INTEGER,
+    [State] [int] NULL,
+    [Version] [varchar](15) NULL,
+    [AuditCreateUser] [int] NULL,
+    [AuditUpdateUser] [int] NULL,
+    [AuditDeleteUser] [int] NULL,
+    [AuditCreateDate] [datetime] NULL,
+    [AuditUpdateDate] [datetime] NULL,
+    [AuditDeleteDate] [datetime] NULL
+)
+
+SELECT * FROM Security
+
+TRUNCATE TABLE Security
+
+INSERT INTO [dbo].[Security] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [Active], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorAdministrator', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.administrator@gmail.com', 'Administrator', GETDATE(), '55-555-5555', 'Calle-Carrera-Admin', 30, 1, '', 1, 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Security] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [Active], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorRegularUser', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.regularuser@gmail.com', 'RegularUser', GETDATE(), '55-555-5555', 'Calle-Carrera-User', 25, 2, '', 2, 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Security] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [Active], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorEdit', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.edit@gmail.com', 'Editor', GETDATE(), '55-555-5555', 'Calle-Carrera-Edit', 20, 3, '', 2, 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Security] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [Active], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorModerator', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.moderator@gmail.com', 'Moderator', GETDATE(), '55-555-5555', 'Calle-Carrera-Mod', 30, 1, '', 2, 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Security] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [Active], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorCustomer', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.customer@gmail.com', 'Customer', GETDATE(), '55-888-5555', 'Calle-Carrera-Cli', 15, 1, '', 2, 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Security] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [Active], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorTechnicalSupport', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.technicalsupport@gmail.com', 'TechnicalSupport', GETDATE(), '55-555-5555', 'Calle-Carrera-ST', 50, 2, '', 2, 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+SELECT * FROM Security
+********************************************************
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UserAdministration]') AND type in (N'U'))
+DROP TABLE [dbo].[Segurity]
+GO
+
+USE [AfinBD]
+
+CREATE TABLE Segurity(
+    SegurityId int primary key identity(1,1), 
+    [User] VARCHAR(50), 
+    UserName VARCHAR(100), 
+    [Password] VARCHAR(100), 
+    Email VARCHAR(200), 
+    [Role] INTEGER, 
+    DateOfBirth DATETIME, 
+    TelephoneNumber VARCHAR(200), 
+    [Address] VARCHAR(200), 
+    SessionTokens INTEGER, 
+    CommunicationPreferences INTEGER,
+	UrlImage VARCHAR(300),
+    [State] [int] NULL,
+    [Version] [varchar](15) NULL,
+    [AuditCreateUser] [int] NULL,
+    [AuditUpdateUser] [int] NULL,
+    [AuditDeleteUser] [int] NULL,
+    [AuditCreateDate] [datetime] NULL,
+    [AuditUpdateDate] [datetime] NULL,
+    [AuditDeleteDate] [datetime] NULL
+)
+
+TRUNCATE TABLE Segurity
+
+INSERT INTO [dbo].[Segurity] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorAdministrator', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.administrator@gmail.com', 0, GETDATE(), '55-555-5555', 'Calle-Carrera', 30, 1, '', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Segurity] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorRegularUser', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.regularuser@gmail.com', 1, GETDATE(), '55-555-5555', 'Calle-Carrera', 30, 1, '', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Segurity] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorEdit', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.edit@gmail.com', 2, GETDATE(), '55-555-5555', 'Calle-Carrera', 30, 1, '', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Segurity] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorModerator', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.moderator@gmail.com', 3, GETDATE(), '55-555-5555', 'Calle-Carrera', 30, 1, '', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Segurity] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [State], [UrlImage], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorCustomer', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.customer@gmail.com', 4, GETDATE(), '55-555-5555', 'Calle-Carrera', 30, 1, '', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Segurity] ( [User], [UserName], [Password], [Email], [Role], [DateOfBirth], [TelephoneNumber], [Address], [SessionTokens], [CommunicationPreferences], [UrlImage], [State], [Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate]
+									   )VALUES('VictorTechnicalSupport', 'Victor Ossa', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=', 'victorossa.technicalsupport@gmail.com', 5, GETDATE(), '55-555-5555', 'Calle-Carrera', 30, 1, '', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+********************************************************
+
+
+
+=========== 5 ===========
+_____________________________________________________________________________________________
+
+         CREACION DE USUARIO DE ACCESO AL SISTEMA EN LA BASE DE DATOS
+_____________________________________________________________________________________________
+
+--drop table Segurity
+
+--== 1 == CREACION DE LA TABLA
+
+USE [BDPrueba]
+GO
+/****** Object:  Table [dbo].[Segurity]    Script Date: 25/03/2022 3:43:08 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Segurity](
+	[SegurityId] [int] IDENTITY(1,1) NOT NULL, 
+	[User] [varchar](50) NOT NULL, 
+	[UserName] [varchar](100) NOT NULL, 
+	[Password] [varchar](100) NOT NULL, 
+	[Email] [varchar](200) NOT NULL, 
+	[Role] [varchar](15) NOT NULL,
+            [State] [int] NULL,
+            [Version] [varchar](15) NULL,
+            [AuditCreateUser] [int] NULL,
+            [AuditUpdateUser] [int] NULL,
+            [AuditDeleteUser] [int] NULL,
+            [AuditCreateDate] [datetime] NULL,
+            [AuditUpdateDate] [datetime] NULL,
+            [AuditDeleteDate] [datetime] NULL
+ CONSTRAINT [PK_Segurity] PRIMARY KEY CLUSTERED 
+(
+	[SegurityId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+_____________________________________________________________________________________________
+
+ CREO EL PRIMER REGISTRO DE USUARIO
+_____________________________________________________________________________________________
+
+INSERT INTO [dbo].[Segurity] ([User], [UserName], [Password], [Email], [Role], [State],[Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate])VALUES('888', '888', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=','victorossa.administrator@gmail.com' , 'Administrator', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Segurity] ([User], [UserName], [Password], [Email], [Role], [State],[Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate])VALUES('888', '888', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=','victorossa.regularuser@gmail.com' , 'RegularUser', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Segurity] ([User], [UserName], [Password], [Email], [Role], [State],[Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate])VALUES('888', '888', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=','victorossa.editor@gmail.com' , 'Editor', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Segurity] ([User], [UserName], [Password], [Email], [Role], [State],[Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate])VALUES('888', '888', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=','victorossa.moderator@gmail.com' , 'Moderator', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Segurity] ([User], [UserName], [Password], [Email], [Role], [State],[Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate])VALUES('888', '888', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=','victorossa.customer@gmail.com' , 'Customer', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+INSERT INTO [dbo].[Segurity] ([User], [UserName], [Password], [Email], [Role], [State],[Version], [AuditCreateUser], [AuditUpdateUser], [AuditDeleteUser], [AuditCreateDate], [AuditUpdateDate], [AuditDeleteDate])VALUES('888', '888', '10000.vA7yyuYSShs1uGFxo6BTEg==.OkLJvMNfX3xNGpFT43SoCmQZin2Zts9XiOIbInh4/vo=','victorossa.technicalsupport@gmail.com' , 'TechnicalSupport', 1, 'v1', 1, 1, 1, GETDATE(), GETDATE(), GETDATE())
+
+
+
+--== 3 == INICIA APLICACION
+--== 4 == INGRESAR A SECURITY
+--== 5 == GENERAR TOKEN
+
+{
+  "user": "SytemAccesUser",
+  "password": "1234"
+}
+
+
+POR POSTMAN
+
+Ruta: https://localhost:PuertoExposicionAlFrontend/api/Security
+
+{
+  "user": "Otro",
+  "userName": "Otro Usuario",
+  "password": "12345",
+  "role": 0
+}
+
+
+--== 5 == CONSULTA OTRAS TABLAS
+
+Bearer 
+
+
+-- En caso de que las tablas no tengan auditoria
+
+ALTER TABLE ProductDetails ADD 
+[State] [int] NULL DEFAULT 1,
+[Version] [varchar](15) NULL,
+[AuditCreateUser] [int] NULL,
+[AuditUpdateUser] [int] NULL,
+[AuditDeleteUser] [int] NULL,           
+[AuditCreateDate] [datetime] NULL,            
+[AuditUpdateDate] [datetime] NULL,
+[AuditDeleteDate] [datetime] NULL;
+
+UPDATE ProductDetails
+SET
+[State] = 1,
+[Version] ='v1',
+[AuditCreateUser] = 1,
+[AuditUpdateUser] = 1,
+[AuditDeleteUser] = 1,           
+[AuditCreateDate] = GETDATE(),            
+[AuditUpdateDate] = GETDATE(),
+[AuditDeleteDate] = GETDATE();
+
+ALTER TABLE Customers ADD 
+[State] [int] NULL DEFAULT 1,
+[Version] [varchar](15) NULL,
+[AuditCreateUser] [int] NULL,
+[AuditUpdateUser] [int] NULL,
+[AuditDeleteUser] [int] NULL,           
+[AuditCreateDate] [datetime] NULL,            
+[AuditUpdateDate] [datetime] NULL,
+[AuditDeleteDate] [datetime] NULL;
+
+UPDATE Customers
+SET
+[State] = 1,
+[Version] ='v1',
+[AuditCreateUser] = 1,
+[AuditUpdateUser] = 1,
+[AuditDeleteUser] = 1,           
+[AuditCreateDate] = GETDATE(),            
+[AuditUpdateDate] = GETDATE(),
+[AuditDeleteDate] = GETDATE();
+
+ALTER TABLE Users ADD 
+[State] [int] NULL DEFAULT 1,
+[Version] [varchar](15) NULL,
+[AuditCreateUser] [int] NULL,
+[AuditUpdateUser] [int] NULL,
+[AuditDeleteUser] [int] NULL,           
+[AuditCreateDate] [datetime] NULL,            
+[AuditUpdateDate] [datetime] NULL,
+[AuditDeleteDate] [datetime] NULL;
+
+UPDATE Users
+SET
+[State] = 1,
+[Version] ='v1',
+[AuditCreateUser] = 1,
+[AuditUpdateUser] = 1,
+[AuditDeleteUser] = 1,           
+[AuditCreateDate] = GETDATE(),            
+[AuditUpdateDate] = GETDATE(),
+[AuditDeleteDate] = GETDATE();
+
+ALTER TABLE UserProfiles ADD 
+[State] [int] NULL DEFAULT 1,
+[Version] [varchar](15) NULL,
+[AuditCreateUser] [int] NULL,
+[AuditUpdateUser] [int] NULL,
+[AuditDeleteUser] [int] NULL,           
+[AuditCreateDate] [datetime] NULL,            
+[AuditUpdateDate] [datetime] NULL,
+[AuditDeleteDate] [datetime] NULL;
+
+UPDATE UserProfiles
+SET
+[State] = 1,
+[Version] ='v1',
+[AuditCreateUser] = 1,
+[AuditUpdateUser] = 1,
+[AuditDeleteUser] = 1,           
+[AuditCreateDate] = GETDATE(),            
+[AuditUpdateDate] = GETDATE(),
+[AuditDeleteDate] = GETDATE();
+
+ALTER TABLE Orders ADD 
+[State] [int] NULL DEFAULT 1,
+[Version] [varchar](15) NULL,
+[AuditCreateUser] [int] NULL,
+[AuditUpdateUser] [int] NULL,
+[AuditDeleteUser] [int] NULL,           
+[AuditCreateDate] [datetime] NULL,            
+[AuditUpdateDate] [datetime] NULL,
+[AuditDeleteDate] [datetime] NULL;
+
+UPDATE Orders
+SET
+[State] = 1,
+[Version] ='v1',
+[AuditCreateUser] = 1,
+[AuditUpdateUser] = 1,
+[AuditDeleteUser] = 1,           
+[AuditCreateDate] = GETDATE(),            
+[AuditUpdateDate] = GETDATE(),
+[AuditDeleteDate] = GETDATE();
+
+
+
+=========== 6 ===========
+_____________________________________________________________________
+
+         .NET Runtime 5.0.17
+_____________________________________________________________________
+
+DESPLIEGUE EN EL IIS
+ASP.NET Core Runtime 5.0.17
+The ASP.NET Core Runtime enables you to run existing web/server applications. On Windows, we recommend installing the Hosting Bundle, which includes the .NET Runtime and IIS support.
+IIS runtime support (ASP.NET Core Module v2)
+
+Runtime Download - Hosting Bundle
+https://dotnet.microsoft.com/en-us/download/dotnet/5.0
+Video
+https://www.youtube.com/watch?v=76BD-8AvYDc&list=PL8lhy0LOIPBszfp9aHLNDUCIfD2sUn0at&index=17
+
+
+
+
+=========== 7 ===========
+_____________________________________________________________________
+
+         CREACION DE USUARIO DE BASE DE DATOS SQL SERVER PARA 
+         INCLUIR EN CADENA DE CONEXION
+_____________________________________________________________________
+
+
+-- CREACION DE USUARIO Y CONTRASEÑA DE LA BASE DE DATOS
+
+-- 1- Abre SQL Server Management Studio (SSMS) y conéctate a tu instancia de SQL Server.
+
+-- 2- Navegar hasta la base de datos en la que desea crear el usuario y clic derecho sobre ella.
+
+-- 3- Seleccione "Nueva consulta" para abrir una nueva ventana de consulta.
+
+-- 4- Ejecuta el siguiente comando SQL para crear un nuevo usuario y contraseña:
+
+--*****************************************************************************************
+
+CREATE LOGIN USERNAME_DATABASE WITH PASSWORD = 'PASSWORD_BD';
+
+--*****************************************************************************************
+
+-- 5- Asociar el usuario con la base de datos, ejecuta el siguiente comando SQL:
+
+--*****************************************************************************************
+
+USE NAME_BASE_OF_DATA;
+CREATE USER USERNAME_DATABASE FOR LOGIN USERNAME_DATABASE;
+
+--*****************************************************************************************
+
+-- 6 Asignar los permisos adecuados al usuario en la base de datos. Puedes otorgarle permisos específicos según la necesidad:
+
+USE BDPrueba;
+ALTER ROLE db_datareader ADD MEMBER USERNAME_DATABASE;
+ALTER ROLE db_datawriter ADD MEMBER USERNAME_DATABASE;
+
+
+{
+  "email": "victorossa.administrator@gmail.com",
+  "password": "1234"
+}
